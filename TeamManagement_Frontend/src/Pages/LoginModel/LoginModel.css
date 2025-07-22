@@ -1,0 +1,268 @@
+/* Add your styles for the modal and other components here */
+
+.otp_modal {
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 22;
+}
+
+.show {
+    display: flex;
+}
+
+.otp_modal_close {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.otp_modal_content {
+    position: fixed;
+    max-width: 25rem;
+    right: 0%;
+    background-color: #fff;
+    padding: 0rem 3rem 1.6rem;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.otp_modal_content .inputs_data {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+}
+
+.otp_modal_content .inputs_data label {
+    margin-bottom: 0px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #757575;
+}
+
+.otp_modal_content .input_form_data {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 45px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.otp_modal_content .input_form_data input {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: .9rem;
+    color: #707070;
+    padding: 0px 15px;
+    /* margin-top: 8px; */
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.submit_data {
+    margin-top: 50px;
+}
+
+.submit_data .submit_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background: #EC1C24 !important;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 24px;
+    margin: auto;
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+
+.error {
+    position: absolute;
+    top: 100%;
+    /* left: 6px; */
+    color: #ec1c24;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.submit_error {
+    position: absolute;
+    bottom: 63%;
+    /* left: 6px; */
+    color: #ec1c24;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+
+.submit_error {
+    position: absolute;
+    bottom: 69%;
+    /* left: 6px; */
+    color: #ec1c24;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.submit_invalid {
+    /* position: absolute; */
+    /* bottom: 63%; */
+    /* left: 6px; */
+    color: #ec1c24;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.terms_div p {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    /* color: #63A1D4; */
+    color: #757575;
+    padding-top: 3rem;
+}
+
+
+.otp_area {
+    width: 100%;
+    margin: 20px auto 0px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.otp_area input {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #b5b5b5;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.otp_area input:focus {
+    border: 2px solid #ec1c24;
+}
+
+.otp_recieve p {
+    text-align: center;
+    font-size: 12px;
+    color: #757575;
+    font-weight: 500;
+    padding-top: 20px;
+}
+
+.login_password a {
+    text-decoration: none;
+}
+
+.login_password p {
+    text-align: center;
+    font-size: 14px;
+    color: #63A1D4;
+    padding-top: 20px;
+    font-weight: 500;
+}
+
+.otp_resend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding-top: 20px;
+}
+
+.resend_otp button {
+    border: none;
+    background: #EC1C24;
+    color: #fff;
+    font-size: 1rem;
+    width: 160px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.back_button button {
+    border: none;
+    background: #EC1C24;
+    color: #fff;
+    font-size: 1rem;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.login_pass p {
+    text-align: center;
+    padding-top: 20px;
+    color: #63A1D4;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.login_option p {
+    text-align: center;
+    padding-top: 30px;
+    color: #63A1D4;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.login_password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding-top: 20px;
+}
+
+.login_option button {
+    border: none;
+    background: #EC1C24;
+    color: #fff;
+    font-size: 1rem;
+    width: 160px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+
+/* ============================Responsive Tablet========================*/
+@media (min-width: 1024px) and (max-width: 1291px) {}
+
+@media (min-width: 768px) and (max-width: 1023px) {}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .hiring_modal_content {
+        max-width: 24rem;
+    }
+
+    .hiring_model_title p {
+        font-size: 12px;
+    }
+}

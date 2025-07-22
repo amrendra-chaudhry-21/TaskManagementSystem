@@ -1,0 +1,46 @@
+{
+  "name": "teammanagementsystem",
+  "version": "1.0.0",
+  "description": "The Team Management System is a full-stack collaboration platform that allows users to seamlessly create teams, invite members via email or link, assign custom roles, and manage access to specific projects. Designed for efficient team coordination, it includes features like role-based permissions, real-time status updates, member activity tracking, and secure access control—ideal for startups, organizations, and project-based work environments.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js",
+    "cluster": "CLUSTER_MODE=true node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "mongoose",
+    "express",
+    "e-learning",
+    "backend"
+  ],
+  "author": "Amrendra Chaudhary",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.0",
+    "multer": "^2.0.1",
+    "node-cache": "^5.1.2",
+    "nodemailer": "^7.0.3",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3",
+    "uuid": "^11.1.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "xlsx": "^0.18.5",
+    "xss-clean": "^0.1.4"
+  }
+}

@@ -1,0 +1,147 @@
+.main .sidebarwrapper {
+  width: 20%;
+  flex: 0 0 20%;
+  transition: all 0.3s ease-in-out;
+}
+
+.main .sidebarwrapper .sidebar {
+  width: 20%;
+  height: 100vh;
+  max-height: calc(100% - 70px);
+  position: fixed;
+  top: 70px;
+  left: 0px;
+  background: #fff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+}
+
+.main .sidebarwrapper .sidebar::-webkit-scrollbar {
+  width: 3px !important;
+}
+
+.main .sidebarwrapper .sidebar::-webkit-scrollbar-thumb {
+  background: transparent !important;
+}
+
+.main .sidebarwrapper:hover .sidebar::-webkit-scrollbar {
+  background: transparent !important;
+}
+
+.main .sidebarwrapper .sidebar ul {
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
+.main .sidebarwrapper .sidebar ul li {
+  list-style: none;
+}
+
+.main .sidebarwrapper .sidebar ul li button {
+  color: rgba(0, 0, 0, 0.7) !important;
+  text-align: left;
+  justify-content: left;
+  border-radius: 10px !important;
+  padding: 12px 15px !important;
+  align-items: center;
+  text-transform: capitalize !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+}
+
+.main .sidebarwrapper .sidebar ul li button * {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.main .sidebarwrapper .sidebar ul li button .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.main .sidebarwrapper .sidebar ul li button .icon svg {
+  font-size: 22px;
+}
+
+.main .sidebarwrapper .sidebar ul li button .arrow {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  transition: all 0.3s ease-in-out;
+}
+
+.main .sidebarwrapper .sidebar ul li button:hover {
+  background: #F9EAE5 !important;
+}
+
+/* .main .sidebarwrapper .sidebar ul li button.active{
+    background: #f1f1f1 !important;
+} */
+
+.main .sidebarwrapper .sidebar ul li button.active .arrow {
+  transform: rotate(90deg);
+}
+
+.main .sidebarwrapper .sidebar ul .submenu {
+  padding: 0 25px;
+  position: relative;
+  transition: 0.3s ease-in-out;
+  height: 0px;
+}
+
+.main .sidebarwrapper .sidebar ul .submenu::before {
+  content: "";
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 25px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.main .sidebarwrapper .sidebar ul .submenu li {
+  width: 100%;
+  list-style: none;
+  /* border-left: 1px solid rgba(0, 0, 0, 0.1); */
+  padding-left: 25px;
+}
+
+.main .sidebarwrapper .sidebar ul .submenu li a {
+  color: #5e5d72 !important;
+  text-decoration: none;
+  padding: 6px 0px;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.main .sidebarwrapper .sidebar ul .submenu li a:hover {
+  color: #b5341e !important;
+}
+
+.main .sidebarwrapper .sidebar ul .submenuwrapper {
+  transition: all 0.4s ease-in-out;
+  height: 0px;
+}
+
+.main .sidebarwrapper .sidebar ul .submenuwrapper.colapsed .submenu {
+  opacity: 0;
+}
+
+.main .sidebarwrapper .sidebar ul .submenuwrapper.colapse {
+  height: auto;
+}
+
+.main .sidebarwrapper .sidebar ul .submenuwrapper.colapse .submenu {
+  opacity: 1;
+  height: auto;
+}

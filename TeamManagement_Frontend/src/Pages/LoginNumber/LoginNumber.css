@@ -1,0 +1,37 @@
+.container_login {
+    max-width: 1280px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.login_data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.login_left img {
+    width: 200px;
+}
+
+.login_right button {
+    border: none;
+    width: 120px;
+    height: 40px;
+    background: #1ca0ec;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+}
+
+.login_button {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.back_section {
+    min-height: 100vh;
+}
