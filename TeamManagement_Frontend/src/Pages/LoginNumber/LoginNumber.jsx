@@ -24,7 +24,7 @@ const LoginNumber = () => {
           <div className="login_data">
             <div className="login_left">
               <img
-                src="https://barcosys.com/barcosys/images/logo-dark.svg"
+                //src="https://barcosys.com/barcosys/images/logo-dark.svg"
                 alt=""
               />
             </div>

@@ -12,6 +12,7 @@ import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import { AuthProvider } from "./Components/AuthProvider/AuthProvider";
 import Signup from "./Pages/Signup/Signup";
 import TeamManagement from "./Pages/TeamManagement/TeamManagement";
+import Project from "./Pages/Project/Project";
 
 function App() {
   return (
@@ -42,6 +43,14 @@ function App() {
             element={
               <PrivateRoute>
                 <TeamManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/project"
+            element={
+              <PrivateRoute>
+                <Project />
               </PrivateRoute>
             }
           />

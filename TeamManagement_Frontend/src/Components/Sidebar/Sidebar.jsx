@@ -43,6 +43,17 @@ const Sidebar = () => {
               </Button>
             </Link>
           </li>
+
+          <li>
+            <Link to="/project">
+              <Button className="w-100">
+                <span className="icon">
+                  <BsFileEarmarkTextFill />
+                </span>
+                Project
+              </Button>
+            </Link>
+          </li>
         </ul>
       </div>
     </>

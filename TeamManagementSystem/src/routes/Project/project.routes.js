@@ -34,6 +34,7 @@ ProjectRouter.route("/project/delete").delete(
   deleteProjectHandler
 );
 ProjectRouter.route("/project").get(authenticateToken, listProjectsHandler);
+
 ProjectRouter.route("/project/update/:id").put(
   authenticateToken,
   updateProjectHandler

@@ -4,34 +4,30 @@ import Swal from "sweetalert2";
 import Header from "../../Components/Header/Header";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
-import "./TeamManagement.css";
+import "./Project.css";
 import PageHeader from "../../Components/PageHeader/PageHeader";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { IoMdRemoveCircleOutline } from "react-icons/io";
 import axios from "axios";
 import { Paths } from "../../config/LoginBaseAPI";
 import { useAuth } from "../../Components/AuthProvider/AuthProvider";
-import TeamModel from "../TeamModel/TeamModel";
-import AddTeam from "../TeamModel/AddTeam";
-import EditModel from "../TeamModel/EditModel";
+import ProjectModel from "../ProjectModel/ProjectModel";
+import EditProjectModel from "../ProjectModel/EditProjectModel";
 
-const TeamManagement = () => {
+const Project = () => {
   const { isAuthenticated, userInfo, logout } = useAuth();
-  const [teams, setTeams] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [isError, setIsError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [totalTeams, setTotalTeams] = useState(0);
+  const [totalProjects, setTotalProjects] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedTeam, setSelectedTeam] = useState({});
-  const [addModalOpen, setAddModalOpen] = useState(false);
-  const [addTeam, setAddTeam] = useState({});
+  const [selectedProject, setSelectedProject] = useState({});
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editSelectedTeam, setEditSelectedTeam] = useState(null);
+  const [editSelectedProject, setEditSelectedProject] = useState(null);
 
   const openModal = () => {
-    setSelectedTeam({});
+    setSelectedProject({});
     setModalOpen(true);
   };
 
@@ -39,17 +35,8 @@ const TeamManagement = () => {
     setModalOpen(false);
   };
 
-  const openAddModal = () => {
-    setAddTeam({});
-    setAddModalOpen(true);
-  };
-
-  const closeAddModal = () => {
-    setAddModalOpen(false);
-  };
-
-  const editOpenModal = (team) => {
-    setEditSelectedTeam(team);
+  const editOpenModal = (project) => {
+    setEditSelectedProject(project);
     setEditModalOpen(true);
   };
 
@@ -57,16 +44,16 @@ const TeamManagement = () => {
     setEditModalOpen(false);
   };
 
-  const fetchTeams = async () => {
+  const fetchProjects = async () => {
     if (!isAuthenticated) {
-      setIsError("Please login to view teams");
+      setIsError("Please login to view projects");
       setIsLoading(false);
       return;
     }
     try {
       setIsLoading(true);
       const token = localStorage.getItem("accessToken");
-      const response = await axios.get(Paths.EndpointsURL.GETAllTeam, {
+      const response = await axios.get(Paths.EndpointsURL.GetProject, {
         params: {
           page: currentPage,
           limit: rowsPerPage,
@@ -76,12 +63,13 @@ const TeamManagement = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (response.data.success) {
-        setTeams(response.data.data.teams);
-        setTotalTeams(response.data.data.pagination.total);
+        setProjects(response.data.data.projects);
+        setTotalProjects(response.data.data.pagination.total);
         setIsError("");
       } else {
-        setIsError(response.data.message || "Failed to fetch teams");
+        setIsError(response.data.message || "Failed to fetch projects");
         if (response.data.message === "Invalid Token!") {
           logout();
         }
@@ -90,7 +78,7 @@ const TeamManagement = () => {
       const errorMessage =
         error.response?.data?.message ||
         error.message ||
-        "Error fetching teams";
+        "Error fetching projects";
       setIsError(errorMessage);
       if (
         error.response?.status === 401 ||
@@ -101,12 +89,6 @@ const TeamManagement = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const updatePaginatedData = (page, rows) => {
-    const startIndex = (page - 1) * rows;
-    const paginatedData = allTeams.slice(startIndex, startIndex + rows);
-    setTeams(paginatedData);
   };
 
   const hasRole = (role) => {
@@ -121,39 +103,36 @@ const TeamManagement = () => {
     ) {
       toast.error("Session expired. Please login again.");
       localStorage.removeItem("accessToken");
-      setTimeout(() => (window.location.href = "/login"), 1500);
+      setTimeout(() => window.location.href, 1500);
     } else {
-      const errorMsg = error.response?.data?.message || "Failed to delete team";
+      const errorMsg =
+        error.response?.data?.message || "Failed to delete project";
       toast.error(errorMsg);
     }
   };
 
-  const deleteTeamHandler = async (id) => {
+  const deleteProjectHandler = async (id) => {
     const confirmed = await confirmDelete();
     if (!confirmed) return;
     try {
       if (!hasRole("Admin")) {
-        toast.error("Only Admins can delete teams!");
+        toast.error("Only Admins can delete project!");
         return;
       }
       const token = localStorage.getItem("accessToken");
       if (!token) {
         throw new Error("No authentication token found");
       }
-      const deleteUrl = `${Paths.EndpointsURL.DeleteTeamMember}/${id}`;
+      const deleteUrl = `${Paths.EndpointsURL.DeleteProject}`;
       await axios.delete(deleteUrl, {
+        data: { projectId: id },
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-      toast.success("Team deleted successfully!");
-      if (fetchTeams) fetchTeams();
-      if (typeof navigate === "function") {
-        setTimeout(() => navigate(0), 1000);
-      } else {
-        setTimeout(() => window.location.reload(), 1000);
-      }
+      toast.success("Project deleted successfully!");
+      fetchProjects();
     } catch (error) {
       handleError(error);
     }
@@ -162,7 +141,7 @@ const TeamManagement = () => {
   const confirmDelete = async () => {
     const { isConfirmed } = await Swal.fire({
       title: "Are you sure?",
-      text: "Are you sure that you want to delete this team?",
+      text: "Are you sure that you want to delete this project?",
       showCancelButton: true,
       cancelButtonColor: "#d33",
       confirmButtonColor: "#3085d6",
@@ -172,52 +151,12 @@ const TeamManagement = () => {
     return isConfirmed;
   };
 
-  const removeMemberHandler = async (teamId, userId) => {
-    const confirmed = await Swal.fire({
-      title: "Are you sure?",
-      text: "Are you sure you want to remove this member from the team?",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, remove it!",
-    });
-    if (!confirmed.isConfirmed) return;
-    try {
-      const token = localStorage.getItem("accessToken");
-      const response = await axios.post(
-        `${Paths.EndpointsURL.RemoveTeamMember}`,
-        {
-          teamId,
-          userId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.data.success) {
-        toast.success("Member removed successfully!");
-        fetchTeams();
-      }
-    } catch (error) {
-      console.error("Error removing member:", error);
-      const errorMessage =
-        error.response?.data?.message || "Failed to remove member";
-      toast.error(errorMessage);
-      if (error.response) {
-        console.error("Response data:", error.response.data);
-      }
-    }
-  };
-
   useEffect(() => {
-    fetchTeams();
+    fetchProjects();
   }, [currentPage, rowsPerPage, isAuthenticated]);
 
   const indexOfFirstItem = (currentPage - 1) * rowsPerPage;
-  const indexOfLastItem = Math.min(currentPage * rowsPerPage, totalTeams);
+  const indexOfLastItem = Math.min(currentPage * rowsPerPage, totalProjects);
 
   const handleChangePage = (newPage) => {
     setCurrentPage(newPage);
@@ -246,83 +185,70 @@ const TeamManagement = () => {
         <div className="content-wrapper">
           <div className="header">
             <PageHeader
-              title="Team Management"
-              subTitle="Manage your teams"
+              title="Project"
+              subTitle="Manage your project"
               icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
             />
           </div>
           <div className="employee-management">
             <div className="search-bar">
-              <button className="create-new" onClick={() => openModal()}>
-                +Create Team
-              </button>
-              <br />
-              <button className="add-new" onClick={() => openAddModal()}>
-                +Add Team
+              <button className="create-new" onClick={openModal}>
+                +Create Project
               </button>
             </div>
 
-            <AddTeam
-              isOpen={addModalOpen}
-              onClose={closeAddModal}
-              person={addTeam}
-            />
-            <TeamModel
+            <ProjectModel
               isOpen={modalOpen}
               onClose={closeModal}
-              person={selectedTeam}
+              project={selectedProject}
+              fetchProjects={fetchProjects}
             />
 
             <table>
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Project Name</th>
                   <th>Description</th>
+                  <th>Team</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {teams?.length > 0 ? (
-                  teams.map((team, index) => (
+                {projects?.length > 0 ? (
+                  projects.map((project, index) => (
                     <tr key={index}>
-                      <td>{truncateText(team.name)}</td>
-                      <td>{truncateText(team.description)}</td>
+                      <td>{truncateText(project.name)}</td>
+                      <td>{truncateText(project.description)}</td>
+                      <td>{truncateText(project.team?.name)}</td>
                       <td className="button_edit">
                         <button
                           className="delete"
-                          onClick={() => deleteTeamHandler(team._id)}
+                          onClick={() => deleteProjectHandler(project._id)}
                         >
                           <MdDelete />
                         </button>
                         <button
                           className="edit"
-                          onClick={() => editOpenModal(team)}
+                          onClick={() => editOpenModal(project)}
                         >
                           <MdEdit />
-                        </button>
-                        <button
-                          className="edit"
-                          onClick={() =>
-                            removeMemberHandler(team._id, userInfo.id)
-                          }
-                        >
-                          <IoMdRemoveCircleOutline />
                         </button>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="3" style={{ textAlign: "center" }}>
-                      {isError || "No teams available"}
+                    <td colSpan="4" style={{ textAlign: "center" }}>
+                      {isError || "No projects available"}
                     </td>
                   </tr>
                 )}
               </tbody>
-              <EditModel
+              <EditProjectModel
                 isOpen={editModalOpen}
                 onClose={editCloseModal}
-                teamToEdit={editSelectedTeam}
+                projectToEdit={editSelectedProject}
+                fetchProjects={fetchProjects}
               />
             </table>
             <div className="pagination">
@@ -339,8 +265,8 @@ const TeamManagement = () => {
                 </select>
               </div>
               <span>
-                {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, totalTeams)}{" "}
-                of {totalTeams}
+                {indexOfFirstItem + 1}-
+                {Math.min(indexOfLastItem, totalProjects)} of {totalProjects}
               </span>
               <div className="all_button">
                 <button
@@ -353,15 +279,14 @@ const TeamManagement = () => {
                 <button
                   className="next"
                   onClick={() => handleChangePage(currentPage + 1)}
-                  disabled={currentPage === Math.ceil(totalTeams / rowsPerPage)}
+                  disabled={
+                    currentPage === Math.ceil(totalProjects / rowsPerPage)
+                  }
                 >
                   ❯
                 </button>
               </div>
             </div>
-            {isError && !teams.length && (
-              <p className="error-message">{isError}</p>
-            )}
           </div>
         </div>
       </div>
@@ -370,4 +295,4 @@ const TeamManagement = () => {
   );
 };
 
-export default TeamManagement;
+export default Project;

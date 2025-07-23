@@ -105,7 +105,7 @@ const Header = () => {
                       <div className="dropdowninfo">
                         <h4>
                           <span>
-                            <b>Mahmul </b>
+                            <b>Amrendra Chaudhary </b>
                             added to his favorite list
                             <b> Leather belt steve madan </b>
                           </span>
