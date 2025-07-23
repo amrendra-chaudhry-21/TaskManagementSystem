@@ -53,20 +53,14 @@ const TeamModel = ({ isOpen, onClose, fetchTeams }) => {
           },
         }
       );
-
-      // Reset form first
       setTeamName("");
       setTeamDescription("");
-
-      // Show success toast
       toast.success("Team created successfully!", {
         position: "top-right",
         autoClose: 2000,
         onClose: () => {
-          // Close modal and refresh after toast closes
           onClose();
           if (fetchTeams) fetchTeams();
-          // If you really want a full page reload:
           window.location.reload();
         },
       });
